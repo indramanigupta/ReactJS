@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+    <title>React ⚛️</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        
+        function Header(props) {
+          console.log(props)
+          return (
+            <header>
+              <h1> {props.name} My House</h1>
+            </header>
+          );
+        }
+
+        function Main(props) {
+          return (
+            <section>
+              <img height="200px"
+              src="./images/house1.jpeg"
+              alt="A house is in a village."/>
+              <ul>
+                {props.houses.map((house) => (
+                  <li key={house.id}>{house.title}</li>
+                ))}
+              </ul>
+            </section>
+          );
+        }
+        
+        // {props.houses.map((house, i) => ( <li key={i}>{house}</li>))}
+
+        // <p>We have a very buitiful house in my village. {props.city}</p>
+
+        function Foorter(props){
+          return (
+            <footer>
+              <p>Copyright {props.year}</p>  
+            </footer>
+          );
+        }
+
+        const houses = [
+          "5 Rooms",
+          "2 Halls",
+          "4 Bathrooms",
+          "5 Pooja Rooms"
+        ];
+
+        const houseObjects = houses.map((house, i) => ({
+          id: i,
+          title: house
+        }));
+
+        // Use React.Fragment, instead of <div> tag #72
+        function App() {
+          return (
+            <React.Fragment>
+              <Header name="Hyderabad"/>
+              <Main city="Shahdol"
+              houses={houseObjects}/>  
+              <Foorter year={new Date().getFullYear()}/>
+          </React.Fragment>
+          );
+        }
+
+       // <Foorter year={2024}/>
+        ReactDOM.render(
+          <App />,
+          document.getElementById("root")
+        );
+    </script>
+  </body>
+</html>

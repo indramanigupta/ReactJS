@@ -1,0 +1,298 @@
+import React, { createContext, useContext } from "react";
+//import React, { createContext } from "react";
+//import React, { useState } from "react";
+//import React, { useRef } from "react";
+//import React, { useState, useEffect, useReducer, useRef } from "react";
+//import { FaStar } from "react-icons/fa";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+//import { useInput } from "./useInput";
+import App from "./App";
+
+/** First Practice
+function App() {
+  const [status, setStatus] = useState("Not delivered");
+  const [checked, setChecked] = useState(false);
+  return (
+    <div>
+      <h1>The package is: {status}.</h1>
+      <button onClick={() => setStatus("Delivered")}>Deliver</button>
+      <input
+        type="checkbox"
+        value={checked}
+        onChange={() => setChecked((checked) => !checked)}
+      />
+      <p>{checked ? "checked" : "not checked"}</p>
+    </div>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById("root"));
+ */
+//const [first, second, third] = ["Alex", "Ali", "Anna"];
+
+//const [, , third] = ["Alex", "Ali", "Anna"];
+//console.log(third);
+
+/** 2nd Practice
+const createArray = (length) => [...Array(length)];
+
+function Star({ selected = false, onSelect }) {
+  return <FaStar color={selected ? "red" : "grey"} onClick={onSelect} />;
+}
+
+function StarRating({ totalStars = 5 }) {
+  const [selectedStars, setSelectedStars] = useState(0);
+  return (
+    <>
+      {createArray(totalStars).map((n, i) => (
+        <Star
+          key={i}
+          selected={selectedStars > i}
+          onSelect={() => setSelectedStars(i + 1)}
+        />
+      ))}
+      <p>
+        {selectedStars} of {totalStars}
+      </p>
+    </>
+  );
+}
+
+function App() {
+  return <StarRating totalStars={10} />;
+}
+ */
+
+/**  Third Practice
+  function App() {
+  const [name, setName] = useState("Jane");
+  const [admin, setAdmin] = useState(false);
+  useEffect(() => {
+    //document.title = `Celebrate ${name}`;
+    console.log(`Celebrate ${name}`);
+  }, [name]);
+
+  useEffect(() => {
+    console.log(`The user is: ${admin ? "admin" : "not admin"}.`);
+  }, [admin]);
+
+  return (
+    <section>
+      <p>Congratulations {name}!</p>
+      <button onClick={() => setName("Will")}>Change Winner</button>
+      <p>{admin ? "logged in" : "not logged in"}</p>
+      <button onClick={() => setAdmin(true)}>Log In</button>
+    </section>
+  );
+} */
+
+/** Practice 3
+function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://api.github.com/users`)
+      .then((response) => response.json())
+      .then(setData);
+  }, []);
+
+  if (data) {
+    return (
+      <div>
+        <ul>
+          {data.map((user) => (
+            <li key={user.id}>{user.login}</li>
+          ))}
+        </ul>
+        <button onClick={() => setData([])}>Remove Data</button>
+      </div>
+    );
+  }
+}
+
+*/
+
+/*  Practice 4- 1
+function App() {
+  const [number, setNumber] = useReducer(
+    (number, newNumber) => number + newNumber,
+    0
+  );
+  return (
+    <div>
+      <h1 onClick={() => setNumber(1)}>{number}</h1>
+    </div>
+  );
+} */
+
+/* Practice 4 -2 
+function App() {
+  const [checked, toggle] = useReducer((checked) => !checked, false);
+
+  return (
+    <div>
+      <input type="checkbox" value={checked} onChange={toggle} />
+      <p>{checked ? "checked" : "not checked"}</p>
+    </div>
+  );
+} */
+
+/* Practice 4 -3
+
+const initialState = {
+  message: "Hi",
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "yell":
+      return { message: `HEY ! I just said ${state.message}` };
+    case "whisper":
+      return { message: `EXECUSE ME ! I just said ${state.message}` };
+    default:
+      return { message: `SORRY ! I just said ${state.message}` };
+  }
+}
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <div>
+      <p>Message: {state.message}</p>
+      <button onClick={() => dispatch({ type: "yell" })}>YELL</button>
+      <button onClick={() => dispatch({ type: "whisper" })}>YELL</button>
+    </div>
+  );
+} */
+
+/* Practice 4 -4
+
+function App() {
+  const sound = useRef();
+  const color = useRef();
+
+  const submit = (e) => {
+    e.prventDefault();
+    const soundVal = sound.current.value;
+    const colorVal = color.current.value;
+    alert(`${soundVal} sounds like ${colorVal}`);
+    sound.current.value = "";
+    color.current.value = "";
+  };
+
+  return (
+    <form onSubmit={submit}>
+      <input ref={sound} type="text" placeholder="Sound..." />
+      <input ref={color} type="color" placeholder="Color..." />
+      <button type="button">Add Color</button>
+    </form>
+  );
+} */
+
+/* Practice 4 -5
+function App() {
+  const [sound, setSound] = useState("");
+  const [color, setColor] = useState("#000000");
+
+  const submit = (e) => {
+    e.prventDefault();
+    alert(`${sound} sounds like ${color}`);
+    setSound("");
+    setColor("#000000");
+  };
+
+  return (
+    <form onSubmit={submit}>
+      <input
+        value={sound}
+        type="text"
+        placeholder="Sound..."
+        onChange={(e) => setSound(e.target.value)}
+      />
+      <input
+        value={color}
+        type="color"
+        placeholder="Color..."
+        onChange={(e) => setColor(e.target.value)}
+      />
+      <button type="button">Add Color</button>
+    </form>
+  );
+}
+*/
+
+/* Practice 5 -1
+function App() {
+  const [titleProps, resetTitle] = useInput("");
+  const [colorProps, resetColor] = useState("#000000");
+
+  const submit = (e) => {
+    e.prventDefault();
+    alert(`${titleProps.value} sounds like ${resetColor.value}`);
+    resetTitle("");
+    resetColor("#000000");
+  };
+
+  return (
+    <form onSubmit={submit}>
+      <input {...titleProps} type="text" placeholder="Sound..." />
+      <input {...colorProps} type="color" placeholder="Color..." />
+      <button type="button">Add Color</button>
+    </form>
+  );
+}
+*/
+
+/*  Practice 5- 2
+
+export const TreesContext = createContext();
+
+const trees = [
+  { id: "1", type: "Mapple" },
+  { id: "2", type: "Oak" },
+  { id: "3", type: "Family" },
+  { id: "4", type: "Component" },
+];
+
+function App() {
+  return (
+    <div>
+      <h1>Trees I've heared Of: </h1>
+    </div>
+  );
+} */
+
+/* Practice 5 -3
+export const TreesContext = createContext();
+
+const trees = [
+  { id: "1", type: "Mapple" },
+  { id: "2", type: "Oak" },
+  { id: "3", type: "Family" },
+  { id: "4", type: "Component" },
+]; */
+
+const TreesContext = createContext();
+
+export const useTrees = () => useContext(TreesContext);
+const trees = [
+  { id: "1", type: "Mapple" },
+  { id: "2", type: "Oak" },
+  { id: "3", type: "Family" },
+  { id: "4", type: "Component" },
+];
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+/* root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+); */
+
+root.render(
+  <TreesContext.Provider value={{ trees }}>
+    <App />
+  </TreesContext.Provider>
+);

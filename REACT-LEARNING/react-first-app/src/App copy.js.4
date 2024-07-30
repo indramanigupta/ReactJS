@@ -1,0 +1,45 @@
+import "./App.css";
+import { useState, useEffect } from "react";
+import { useReducer } from "react";
+
+//const [firstCity, second] = ["Mumbai", "Delhi", "Hyderabad", "Banglore"];
+
+//console.log(firstCity);
+//console.log(second);
+
+function App() {
+  const [emotion, setEmotion] = useState("happy");
+  const [secondary, setSecondary] = useState("tired");
+  //const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useReducer((checked) => !checked, false);
+
+  useEffect(() => {
+    console.log(`It's ${emotion} around here!`);
+  }, [emotion]);
+  // emotion, secondary can be here in one array
+  useEffect(() => {
+    console.log(`It's ${secondary} around here!`);
+  }, [secondary]);
+  //console.log(what);
+
+  //<h1>Hello from {library}</h1>
+
+  return (
+    <div className="App">
+      <h1>Current emotion is {emotion}</h1>
+      <button onClick={() => setEmotion("Sad")}>Sad</button>
+      <button onClick={() => setEmotion("Excited")}>Excited</button>
+
+      <h2>Current secondary emotion is {secondary}!</h2>
+      <button onClick={() => setSecondary("grateful")}>Grateful</button>
+
+      <input type="checkbox" value={checked} onChange={setChecked} />
+
+      <label>{checked ? "checked" : "not checked"}</label>
+    </div>
+  );
+
+  /*<input type="checkbox" value={checked} onChange={() => setChecked((checked) => !checked)}/>*/
+}
+
+export default App;
